@@ -1,0 +1,8 @@
+Code Smells:
+https://docs.google.com/document/d/1u6xlFiouUHdK0KhxCxtss_RoyURha4Rz4ItPwKqVa-g/edit
+
+Design Document:
+https://docs.google.com/document/d/1va75oejgxIRoWg0LkBuMZ3f93IWKgf4KP1fQH9iaZBU/edit
+
+New Features:
+https://docs.google.com/document/d/13wiuvNyY0SAbYr9RCxFRLdzYHv3Phur7v94VfDn6RRk/edit
