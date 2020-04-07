@@ -71,7 +71,6 @@
  */
 
 import java.util.*;
-import java.lang.Boolean;
 
 public class Pinsetter {
 
@@ -96,12 +95,12 @@ public class Pinsetter {
 	 * Sends pinsetter events to all subscribers
 	 * 
 	 * @pre none
-	 * @post all subscribers have recieved pinsetter event with updated state
+	 * @post all subscribers have received pinsetter event with updated state
 	 * */
-	private void sendEvent(int jdpins) {	// send events when our state is changd
-		for (int i=0; i < subscribers.size(); i++) {
-			((PinsetterObserver)subscribers.get(i)).receivePinsetterEvent(
-				new PinsetterEvent(pins, foul, throwNumber, jdpins));
+	private void sendEvent(int jdpins) {	// send events when our state is changed
+		for (Object subscriber : subscribers) {
+			((PinsetterObserver) subscriber).receivePinsetterEvent(
+					new PinsetterEvent(pins, foul, throwNumber, jdpins));
 		}
 	}
 
@@ -149,7 +148,9 @@ public class Pinsetter {
 
 		try {
 			Thread.sleep(500);				// pinsetter is where delay will be in a real game
-		} catch (Exception e) {}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 		sendEvent(count);
 
@@ -170,7 +171,9 @@ public class Pinsetter {
 		
 		try {
 			Thread.sleep(1000);
-		} catch (Exception e) {}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		sendEvent(-1);
 	}
@@ -199,5 +202,5 @@ public class Pinsetter {
 		subscribers.add(subscriber);
 	}
 
-};
+}
 

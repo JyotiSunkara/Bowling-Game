@@ -63,17 +63,17 @@ public class LaneEvent {
 	}
 
 
-	public int[] getCurScores(){ 
-		return curScores;
-	}
+//	public int[] getCurScores(){
+//		return curScores;
+//	}
 	
 	public int getIndex() {
 		return index;
 	}
 
-	public int getFrame( ) {
-		return frame;
-	}
+//	public int getFrame( ) {
+//		return frame;
+//	}
 
 	public int getBall( ) {
 		return ball;

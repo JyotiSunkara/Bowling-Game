@@ -1,7 +1,7 @@
-/**
- * 
- * SMTP implementation based on code by Real Gagnon mailto:real@rgagnon.com
- * 
+/*
+
+  SMTP implementation based on code by Real Gagnon mailto:real@rgagnon.com
+
  */
 
 
@@ -9,7 +9,6 @@ import java.io.*;
 import java.util.Vector;
 import java.util.Iterator;
 import java.net.*;
-import java.awt.*;
 import java.awt.print.*;
 
 public class ScoreReport {
@@ -23,7 +22,8 @@ public class ScoreReport {
 		try{
 			v = ScoreHistoryFile.getScores(nick);
 		} catch (Exception e){System.err.println("Error: " + e);}
-		
+
+		assert v != null;
 		Iterator scoreIt = v.iterator();
 		
 		content = "";
@@ -33,18 +33,22 @@ public class ScoreReport {
 		content += "\n";
 		content += "Final scores for this session: ";
 		content += scores[0];
+		StringBuilder sb = new StringBuilder();
 		for (int i = 1; i < games; i++){
-			content += ", " + scores[i];
+			sb.append(", ").append(scores[i]);
 		}
+		content += sb.toString();
 		content += ".\n";
 		content += "\n";
 		content += "\n";
 		content += "Previous scores by date: \n";
+		StringBuilder newsb = new StringBuilder();
 		while (scoreIt.hasNext()){
 			Score score = (Score) scoreIt.next();
-			content += "  " + score.getDate() + " - " +  score.getScore();
-			content += "\n";
+			newsb.append("  ").append(score.getDate()).append(" - ").append(score.getScore());
+			newsb.append("\n");
 		}
+		content += newsb.toString();
 		content += "\n\n";
 		content += "Thank you for your continuing patronage.";
 
@@ -60,7 +64,7 @@ public class ScoreReport {
 				new BufferedWriter(
 					new OutputStreamWriter(s.getOutputStream(), "8859_1"));
 
-			String boundary = "DataSeparatorString";
+//			String boundary = "DataSeparatorString";
 
 			// here you are supposed to send your username
 			sendln(in, out, "HELO world");
@@ -93,7 +97,7 @@ public class ScoreReport {
 			try {
 				job.print();
 			} catch (PrinterException e) {
-				System.out.println(e);
+				e.printStackTrace();
 			}
 		}
 
@@ -104,7 +108,7 @@ public class ScoreReport {
 			out.write(s + "\r\n");
 			out.flush();
 			// System.out.println(s);
-			s = in.readLine();
+			in.readLine();
 			// System.out.println(s);
 		} catch (Exception e) {
 			e.printStackTrace();

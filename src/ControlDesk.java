@@ -41,12 +41,11 @@
  */
 
 import java.util.*;
-import java.io.*;
 
 class ControlDesk extends Thread {
 
 	/** The collection of Lanes */
-	private HashSet lanes;
+	private HashSet<Lane> lanes;
 
 	/** The party wait queue */
 	private Queue partyQueue;
@@ -55,21 +54,21 @@ class ControlDesk extends Thread {
 	private int numLanes;
 	
 	/** The collection of subscribers */
-	private Vector subscribers;
+	private Vector<ControlDeskObserver> subscribers;
 
     /**
      * Constructor for the ControlDesk class
      *
-     * @param numlanes	the numbler of lanes to be represented
+     * @param numLanes	the numbler of lanes to be represented
      *
      */
 
 	public ControlDesk(int numLanes) {
 		this.numLanes = numLanes;
-		lanes = new HashSet(numLanes);
+		lanes = new HashSet<>(numLanes);
 		partyQueue = new Queue();
 
-		subscribers = new Vector();
+		subscribers = new Vector<>();
 
 		for (int i = 0; i < numLanes; i++) {
 			lanes.add(new Lane());
@@ -90,7 +89,9 @@ class ControlDesk extends Thread {
 			
 			try {
 				sleep(250);
-			} catch (Exception e) {}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 		
@@ -112,10 +113,8 @@ class ControlDesk extends Thread {
 
 			patron = BowlerFile.getBowlerInfo(nickName);
 
-		} catch (FileNotFoundException e) {
-			System.err.println("Error..." + e);
-		} catch (IOException e) {
-			System.err.println("Error..." + e);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 
 		return patron;
@@ -127,12 +126,12 @@ class ControlDesk extends Thread {
      */
 
 	public void assignLane() {
-		Iterator it = lanes.iterator();
+		Iterator<Lane> it = lanes.iterator();
 
 		while (it.hasNext() && partyQueue.hasMoreElements()) {
-			Lane curLane = (Lane) it.next();
+			Lane curLane = it.next();
 
-			if (curLane.isPartyAssigned() == false) {
+			if (!curLane.isPartyAssigned()) {
 				System.out.println("ok... assigning this party");
 				curLane.assignParty(((Party) partyQueue.next()));
 			}
@@ -140,24 +139,23 @@ class ControlDesk extends Thread {
 		publish(new ControlDeskEvent(getPartyQueue()));
 	}
 
-    /**
-     */
 
-	public void viewScores(Lane ln) {
-		// TODO: attach a LaneScoreView object to that lane
-	}
+
+//	public void viewScores(Lane ln) {
+//		// TODO: attach a LaneScoreView object to that lane
+//	}
 
     /**
-     * Creates a party from a Vector of nickNAmes and adds them to the wait queue.
+     * Creates a party from a Vector of nickNames and adds them to the wait queue.
      *
      * @param partyNicks	A Vector of NickNames
      *
      */
 
 	public void addPartyQueue(Vector partyNicks) {
-		Vector partyBowlers = new Vector();
-		for (int i = 0; i < partyNicks.size(); i++) {
-			Bowler newBowler = registerPatron(((String) partyNicks.get(i)));
+		Vector<Bowler> partyBowlers = new Vector<>();
+		for (Object partyNick : partyNicks) {
+			Bowler newBowler = registerPatron(((String) partyNick));
 			partyBowlers.add(newBowler);
 		}
 		Party newParty = new Party(partyBowlers);
@@ -172,11 +170,11 @@ class ControlDesk extends Thread {
      *
      */
 
-	public Vector getPartyQueue() {
-		Vector displayPartyQueue = new Vector();
-		for ( int i=0; i < ( (Vector)partyQueue.asVector()).size(); i++ ) {
+	public Vector<String> getPartyQueue() {
+		Vector<String> displayPartyQueue = new Vector<>();
+		for ( int i=0; i < ( partyQueue.asVector()).size(); i++ ) {
 			String nextParty =
-				((Bowler) ((Vector) ((Party) partyQueue.asVector().get( i ) ).getMembers())
+				((Bowler) ( ((Party) partyQueue.asVector().get( i ) ).getMembers())
 					.get(0))
 					.getNickName() + "'s Party";
 			displayPartyQueue.addElement(nextParty);
@@ -214,13 +212,10 @@ class ControlDesk extends Thread {
      */
 
 	public void publish(ControlDeskEvent event) {
-		Iterator eventIterator = subscribers.iterator();
-		while (eventIterator.hasNext()) {
-			(
-				(ControlDeskObserver) eventIterator
-					.next())
+		for (ControlDeskObserver subscriber : subscribers) {
+			subscriber
 					.receiveControlDeskEvent(
-				event);
+							event);
 		}
 	}
 
@@ -231,7 +226,7 @@ class ControlDesk extends Thread {
      *
      */
 
-	public HashSet getLanes() {
+	public HashSet<? extends Lane> getLanes() {
 		return lanes;
 	}
 }
