@@ -32,9 +32,9 @@ public class LaneEvent {
 	int ball;
 	Bowler bowler;
 	int[][] cumulScore;
-	HashMap score;
+	private HashMap score;
 	int index;
-	int frameNum;
+	private int frameNum;
 	int[] curScores;
 	boolean mechProb;
 	
@@ -91,5 +91,5 @@ public class LaneEvent {
 		return bowler;
 	}
 
-};
+}
  

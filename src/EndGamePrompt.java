@@ -22,11 +22,12 @@ public class EndGamePrompt implements ActionListener {
 
 	private int result;
 
-	private String selectedNick, selectedMember;
+	private String selectedNick;
+	private String selectedMember;
 
 	public EndGamePrompt( String partyName ) {
 
-		result =0;
+		result = 0;
 		
 		win = new JFrame("Another Game for " + partyName + "?" );
 		win.getContentPane().setLayout(new BorderLayout());
