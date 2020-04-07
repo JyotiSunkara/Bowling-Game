@@ -20,10 +20,10 @@
  * 
  */
 
-/**
+/*
  * Class for GUI components need to add a party
  *
- */
+*/
 
 import java.awt.*;
 import java.awt.event.*;
@@ -32,7 +32,6 @@ import javax.swing.border.*;
 import javax.swing.event.*;
 
 import java.util.*;
-import java.text.*;
 
 /**
  * Constructor for GUI used to Add Parties to the waiting party queue.
