@@ -1,16 +1,15 @@
-/**
- *
- * To change this generated comment edit the template variable "typecomment":
- * Window>Preferences>Java>Templates.
- * To enable and disable the creation of type comments go to
- * Window>Preferences>Java>Code Generation.
+/*
+
+  To change this generated comment edit the template variable "typecomment":
+  Window>Preferences>Java>Templates.
+  To enable and disable the creation of type comments go to
+  Window>Preferences>Java>Code Generation.
  */
 
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.border.*;
-import javax.swing.event.*;
+
 
 public class LaneStatusView implements ActionListener, LaneObserver, PinsetterObserver {
 
