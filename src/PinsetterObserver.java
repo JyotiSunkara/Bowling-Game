@@ -8,7 +8,7 @@
  *   Revision 1.2  2003/01/26 22:34:44  ???
  *   Total rewrite of lane and pinsetter for R2's observer model
  *   Added Lane/Pinsetter Observer
- *   Rewrite of scoring algorithm in lane
+ *   Rewrite of scoring algorythm in lane
  *
  *   Revision 1.1  2003/01/19 21:04:24  ???
  *   created pinsetterevent and pinsetterobserver
@@ -19,10 +19,11 @@
 
 public interface PinsetterObserver {
 
-	/** receivePinsetterEvent()
-	 * 
-	 * defines the method for an object to receive a pinsetter event
-	 */
-	void receivePinsetterEvent(PinsetterEvent pe);
+    /**
+     * recievePinsetterEvent()
+     * <p>
+     * defines the method for an object torecieve a pinsetter event
+     */
+    void receivePinsetterEvent(PinsetterEvent pe);
 }
 
