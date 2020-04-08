@@ -19,7 +19,6 @@ public class EndGameReport implements ActionListener, ListSelectionListener {
     private final JFrame win;
     private final JButton printButton;
     private final JButton finished;
-//    private Vector myVector;
     private final Vector<String> retVal;
 
     private int result;

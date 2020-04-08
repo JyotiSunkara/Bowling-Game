@@ -164,7 +164,7 @@ public class Lane extends Thread implements PinsetterObserver {
      * Constructs a new lane and starts its thread
      *
      * @pre none
-     * @post a new lane has been created and its thered is executing
+     * @post a new lane has been created and its thread is executing
      */
     public Lane() {
         setter = new Pinsetter();
@@ -248,7 +248,7 @@ public class Lane extends Thread implements PinsetterObserver {
                     resetScores();
                     resetBowlerIterator();
 
-                } else if (result == 2) {// no, dont want to play another game
+                } else if (result == 2) {// no, don't want to play another game
                     Vector<String> printVector;
                     EndGameReport egr = new EndGameReport((party.getMembers().get(0)).getNickName() + "'s Party", party);
                     printVector = egr.getResult();
@@ -298,7 +298,7 @@ public class Lane extends Thread implements PinsetterObserver {
         if (pe.pinsDownOnThisThrow() >= 0) {            // this is a real throw
             markScore(currentThrower, frameNumber + 1, pe.getThrowNumber(), pe.pinsDownOnThisThrow());
 
-            // next logic handles the ?: what conditions dont allow them another throw?
+            // next logic handles the ?: what conditions don't allow them another throw?
             // handle the case of 10th frame first
             if (frameNumber == 9) {
                 if (pe.totalPinsDown() == 10) {

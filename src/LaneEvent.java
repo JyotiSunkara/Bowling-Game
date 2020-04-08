@@ -27,7 +27,7 @@ import java.util.HashMap;
 
 public class LaneEvent {
 
-    int frame;
+//    int frame;
     int ball;
     Bowler bowler;
     int[][] cumulScore;
