@@ -4,8 +4,7 @@ import ViewControl.ControlDeskView;
 /**
  * drive serves as the startup file for the application.
  * 
- * Refactored by Hunter Caskey & Sultan Mira 
- * 
+ *
  */
 public class drive {
 
